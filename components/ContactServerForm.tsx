@@ -22,7 +22,7 @@ export default function ContactServerForm() {
       )}
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium">
+        <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest text-muted">
           Name
         </label>
         <input
@@ -30,13 +30,13 @@ export default function ContactServerForm() {
           name="name"
           type="text"
           defaultValue={state.values?.name}
-          className="mt-2 block w-full rounded-xl border border-zinc-300 bg-transparent px-4 py-2.5 text-sm dark:border-zinc-700"
+          className="mt-2 block w-full rounded-sm border border-border bg-card px-4 py-3 text-sm outline-none transition-colors focus:border-blush-deep focus:ring-2 focus:ring-blush/30"
         />
         {state.errors?.name && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{state.errors.name}</p>}
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium">
+        <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest text-muted">
           Email
         </label>
         <input
@@ -44,13 +44,13 @@ export default function ContactServerForm() {
           name="email"
           type="email"
           defaultValue={state.values?.email}
-          className="mt-2 block w-full rounded-xl border border-zinc-300 bg-transparent px-4 py-2.5 text-sm dark:border-zinc-700"
+          className="mt-2 block w-full rounded-sm border border-border bg-card px-4 py-3 text-sm outline-none transition-colors focus:border-blush-deep focus:ring-2 focus:ring-blush/30"
         />
         {state.errors?.email && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{state.errors.email}</p>}
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium">
+        <label htmlFor="message" className="block font-mono text-xs uppercase tracking-widest text-muted">
           Message
         </label>
         <textarea
@@ -58,7 +58,7 @@ export default function ContactServerForm() {
           name="message"
           rows={5}
           defaultValue={state.values?.message}
-          className="mt-2 block w-full rounded-xl border border-zinc-300 bg-transparent px-4 py-2.5 text-sm dark:border-zinc-700"
+          className="mt-2 block w-full rounded-sm border border-border bg-card px-4 py-3 text-sm outline-none transition-colors focus:border-blush-deep focus:ring-2 focus:ring-blush/30"
         />
         {state.errors?.message && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{state.errors.message}</p>}
       </div>
@@ -66,7 +66,7 @@ export default function ContactServerForm() {
       <button
         type="submit"
         disabled={pending}
-        className="rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-80 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900"
+        className="bg-blush px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-colors hover:bg-blush-deep hover:text-white disabled:opacity-50"
       >
         {pending ? "Sending..." : "Send message"}
       </button>
