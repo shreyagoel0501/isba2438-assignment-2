@@ -15,9 +15,20 @@ export default async function ProjectPage({
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
+  const index = projects.findIndex((p) => p.slug === slug);
+  const previous = projects[(index - 1 + projects.length) % projects.length];
+  const next = projects[(index + 1) % projects.length];
+
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-16">
-      <h1 className="text-3xl font-bold tracking-tight">{project.title}</h1>
+      <nav className="text-sm text-muted">
+        <Link href="/" className="hover:text-blush-deep">Home</Link>
+        {" / "}
+        <Link href="/projects" className="hover:text-blush-deep">Projects</Link>
+        {" / "}
+        <span>{project.title}</span>
+      </nav>
+      <h1 className="mt-4 text-3xl font-bold tracking-tight">{project.title}</h1>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         {project.summary}
       </p>
@@ -42,12 +53,17 @@ export default async function ProjectPage({
           View on GitHub
         </a>
       )}
-      <Link
-        href="/projects"
-        className="mt-10 inline-block text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-      >
-        ← Back to projects
-      </Link>
+      <div className="mt-10 flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-400">
+        <Link
+          href={`/projects/${previous.slug}`}
+          className="hover:text-blush-deep"
+        >
+          ← {previous.title}
+        </Link>
+        <Link href={`/projects/${next.slug}`} className="hover:text-blush-deep">
+          {next.title} →
+        </Link>
+      </div>
     </main>
   );
 }
