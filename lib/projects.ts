@@ -4,6 +4,7 @@ export type Project = {
   summary: string;
   description: string;
   tech: string[];
+  githubUrl: string;
 };
 
 export const projects: Project[] = [
@@ -14,6 +15,7 @@ export const projects: Project[] = [
     description:
       "A full-stack fitness agent with a Streamlit frontend, an orchestration layer that interprets what the user wants, and a recommendation engine that combines hard safety rules with LLM prompting. It adjusts workout intensity to the user's menstrual cycle phase and stores workout history and feedback in a vector database, so plans become more personal over time.",
     tech: ["Python", "Streamlit", "LLMs", "Ollama embeddings", "Vector database"],
+    githubUrl: "https://github.com/shreyagoel0501/AI_Gym_Agent",
   },
   {
     slug: "wine-quality-prediction",
@@ -22,6 +24,7 @@ export const projects: Project[] = [
     description:
       "A binary classification pipeline on about 6,500 wine samples. I engineered features such as a sulphur ratio, total acidity, and a body index, used SMOTE to handle class imbalance, and compared Logistic Regression, Decision Trees, Gradient Boosting, and XGBoost. XGBoost reached 0.90 AUC, and I tuned it for precision to avoid recommending bad wines. The top predictors were alcohol content, volatile acidity, and the engineered body index.",
     tech: ["Python", "Scikit-learn", "XGBoost", "SMOTE", "Feature engineering"],
+    githubUrl: "https://github.com/shreyagoel0501/Wine_Prediction",
   },
 ];
 
