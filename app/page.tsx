@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
+import SectionHeading from "@/components/SectionHeading";
 
 const stats = [
   { value: "3+", label: "Years at Deloitte" },
@@ -58,10 +59,7 @@ export default function Home() {
       </section>
 
       <section className="mt-24">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
-          Selected work
-        </p>
-        <h2 className="mt-2 text-4xl">Featured projects</h2>
+        <SectionHeading label="Selected work" title="Featured projects" />
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {projects.slice(0, 3).map((project) => (
             <ProjectCard key={project.slug} project={project} />
