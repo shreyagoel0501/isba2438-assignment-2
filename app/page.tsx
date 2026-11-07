@@ -1,29 +1,79 @@
+import Image from "next/image";
 import Link from "next/link";
+import { projects } from "@/lib/projects";
+import ProjectCard from "@/components/ProjectCard";
+
+const stats = [
+  { value: "3+", label: "Years at Deloitte" },
+  { value: "26+", label: "Pipelines built" },
+  { value: "4.0", label: "Graduate GPA" },
+];
 
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-      <h1 className="text-4xl sm:text-5xl">Shreya Goel</h1>
-      <p className="mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-        Business Analytics graduate student turning data into decisions with machine learning and AI
-      </p>
-      <p className="mt-6 max-w-xl text-zinc-600 dark:text-zinc-400">
-        I build ML models, LLM-powered tools, and analytics that turn messy data into clear, practical recommendations.
-      </p>
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+    <main className="mx-auto w-full max-w-6xl px-6 py-16">
+      <section className="grid items-center gap-12 md:grid-cols-2">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
+            Business Analytics · Data Science · AI
+          </p>
+          <h1 className="mt-4 text-6xl sm:text-7xl">Shreya Goel</h1>
+          <p className="mt-4 font-display text-2xl italic text-blush-deep">
+            Turning messy data into decisions that stick.
+          </p>
+          <p className="mt-4 text-muted">
+            MS Business Analytics student at Santa Clara University, previously
+            three years at Deloitte, now building ML models and LLM tools.
+          </p>
+          <Link
+            href="/projects"
+            className="mt-8 inline-block bg-blush px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-colors hover:bg-blush-deep hover:text-white"
+          >
+            View my work
+          </Link>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm shadow-[0_30px_60px_-20px_rgba(232,116,138,0.35)]">
+            <Image
+              src="/shreya.jpg"
+              alt="Shreya Goel"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+          <div className="mt-10 grid w-full grid-cols-3 gap-4 text-center">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-4xl text-blush-deep">
+                  {stat.value}
+                </p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-24">
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
+          Selected work
+        </p>
+        <h2 className="mt-2 text-4xl">Featured projects</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {projects.slice(0, 3).map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
         <Link
           href="/projects"
-          className="rounded-full bg-zinc-900 px-6 py-3 font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-300"
+          className="mt-8 inline-block text-blush-deep hover:underline"
         >
-          View my projects
+          See all projects →
         </Link>
-        <Link
-          href="/contact-me-server-form"
-          className="rounded-full border border-zinc-300 px-6 py-3 font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
-        >
-          Contact me
-        </Link>
-      </div>
+      </section>
     </main>
   );
 }
