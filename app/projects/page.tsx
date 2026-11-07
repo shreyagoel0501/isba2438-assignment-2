@@ -4,10 +4,7 @@ import ProjectCard from "@/components/ProjectCard";
 export default function Projects() {
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-16">
-      <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
-        Portfolio
-      </p>
-      <h1 className="mt-3 text-4xl sm:text-5xl">My Projects</h1>
+      <h1 className="text-4xl sm:text-5xl">My Projects</h1>
       <p className="mt-2 text-muted">
         A mix of machine learning, analytics and AI projects from school and
         work.

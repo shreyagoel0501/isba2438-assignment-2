@@ -26,12 +26,20 @@ export default function Home() {
             MS Business Analytics student at Santa Clara University, previously
             three years at Deloitte, now building ML models and LLM tools.
           </p>
-          <Link
-            href="/projects"
-            className="mt-8 inline-block bg-blush px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-colors hover:bg-blush-deep hover:text-white"
-          >
-            View my work
-          </Link>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/projects"
+              className="inline-block bg-blush px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-colors hover:bg-blush-deep hover:text-white"
+            >
+              View my work
+            </Link>
+            <Link
+              href="/about-me"
+              className="inline-block border border-foreground/20 px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-colors hover:border-blush-deep hover:text-blush-deep"
+            >
+              More about me
+            </Link>
+          </div>
         </div>
         <div className="flex flex-col items-center">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm shadow-[0_30px_60px_-20px_rgba(232,116,138,0.35)]">
@@ -59,7 +67,7 @@ export default function Home() {
       </section>
 
       <section className="mt-24">
-        <SectionHeading label="Selected work" title="Featured projects" />
+        <SectionHeading title="Featured projects" />
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {projects.slice(0, 3).map((project) => (
             <ProjectCard key={project.slug} project={project} />

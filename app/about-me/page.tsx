@@ -24,22 +24,35 @@ export default function AboutMe() {
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-16">
       <section className="py-12">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
-          My story
-        </p>
-        <h1 className="mt-2 text-4xl sm:text-5xl">About me</h1>
-        <p className="mt-6 leading-8 text-muted">
-          I’m an MS in Business Analytics student at Santa Clara University’s Leavey School of Business, graduating in
-          December 2026 with a 4.0 GPA. Before SCU, I spent three years at Deloitte as a Workday Financials Technical
-          Analyst, building data integrations and reports for healthcare and public-sector clients. Now I focus on
-          statistics, machine learning, and LLM-powered tools, most recently as a Marketing Analytics Intern at Aquila
-          Clouds and on an AI meeting-effectiveness practicum with Microsoft. I enjoy turning messy data into clear,
-          practical recommendations.
-        </p>
+        <h1 className="text-4xl sm:text-5xl">About me</h1>
+        <div className="mt-6 space-y-4 text-lg leading-8 text-muted">
+          <p>
+            My journey with data started in grade 11, when I chose the science stream and took computer science.
+            Honestly, I was not good at it at all. It took me a long time to build the logic in my head and get
+            comfortable with C++. But I stuck with it, and after grade 12 I did my undergrad at Christ University in
+            computer science, math and stats, which really solidified my foundation. C, Java, JavaScript, HTML, CSS, R,
+            Python, you name it, I’ve worked with it.
+          </p>
+          <p>
+            After that I joined Deloitte as a Workday Financials analyst. I didn’t code much there, apart from Workday
+            Studio, XSLT and connectors, but I realized that while I enjoy the technical side, I really love talking to
+            clients about what the data found and what the insights mean. Business analytics sits right between the
+            technical team and the business team, and that’s where I want to be. Talking is one thing, but I also want
+            to be the person who actually understands the data.
+          </p>
+          <p>
+            I’ve loved every single class in this program. My favorite so far is machine learning, especially learning
+            the statistics behind the algorithms.
+          </p>
+          <p>
+            In my free time I like to sing, crochet, and watch thrillers and murder mysteries. I love talking to
+            people, and I think I’d make a great personality hire.
+          </p>
+        </div>
       </section>
 
       <section className="py-12">
-        <SectionHeading label="Where I’ve worked" title="Experience" />
+        <SectionHeading title="Experience" />
         <div className="mt-8 space-y-6">
           {experience.map((role) => (
             <ExperienceCard key={role.title} role={role} />
@@ -48,7 +61,7 @@ export default function AboutMe() {
       </section>
 
       <section className="py-12">
-        <SectionHeading label="Where I’ve studied" title="Education" />
+        <SectionHeading title="Education" />
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           {education.map((edu) => (
             <div key={edu.school} className="rounded-sm border border-border bg-card p-6">
@@ -70,7 +83,7 @@ export default function AboutMe() {
       </section>
 
       <section className="py-12">
-        <SectionHeading label="What I work with" title="Skills" />
+        <SectionHeading title="Skills" />
         <ul className="mt-8 flex flex-wrap gap-2">
           {skills.map((skill) => (
             <li
@@ -84,7 +97,7 @@ export default function AboutMe() {
       </section>
 
       <section className="py-12">
-        <SectionHeading label="Recognition" title="Highlights" />
+        <SectionHeading title="Highlights" />
         <ul className="mt-8 space-y-3">
           {highlights.map((highlight) => (
             <li key={highlight} className="flex gap-3">
@@ -95,28 +108,6 @@ export default function AboutMe() {
         </ul>
       </section>
 
-      <section className="py-12">
-        <SectionHeading label="Beyond the data" title="A little about me" />
-        <p className="mt-6 leading-8 text-muted">
-          Outside of data, I sing, crochet, and never say no to a good thriller or murder mystery. I love talking to
-          people, and I’m pretty sure I’d make a great personality hire.
-        </p>
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {[
-            "Singing",
-            "Crochet",
-            "Thrillers & murder mysteries",
-            "Talking to people",
-          ].map((chip) => (
-            <li
-              key={chip}
-              className="rounded-full bg-blush-pale px-3 py-1 font-mono text-xs text-blush-deep"
-            >
-              {chip}
-            </li>
-          ))}
-        </ul>
-      </section>
     </main>
   );
 }
