@@ -28,7 +28,7 @@ export default async function ProjectPage({
         {" / "}
         <span>{project.title}</span>
       </nav>
-      <h1 className="mt-4 text-3xl font-bold tracking-tight">{project.title}</h1>
+      <h1 className="mt-4 text-4xl sm:text-5xl">{project.title}</h1>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         {project.summary}
       </p>

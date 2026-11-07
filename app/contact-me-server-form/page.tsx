@@ -3,7 +3,7 @@ import ContactServerForm from "@/components/ContactServerForm";
 export default function ContactMe() {
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-16">
-      <h1 className="text-3xl font-bold tracking-tight">Contact Me</h1>
+      <h1 className="text-4xl sm:text-5xl">Contact Me</h1>
       <p className="mt-6 leading-8 text-zinc-600 dark:text-zinc-400">
         Send me a message below or email me at{" "}
         <a
