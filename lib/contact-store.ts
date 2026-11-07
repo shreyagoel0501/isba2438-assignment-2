@@ -15,19 +15,15 @@ const filePath = path.join(dataDir, "contact-submissions.json");
 export async function readSubmissions(): Promise<Submission[]> {
   try {
     return JSON.parse(await readFile(filePath, "utf8")) as Submission[];
-  } catch {
-    return [];
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw error;
   }
 }
 
 export async function saveSubmission(data: ContactInput, source: "server-form" | "api") {
   await mkdir(dataDir, { recursive: true });
-  let submissions: Submission[] = [];
-  try {
-    submissions = JSON.parse(await readFile(filePath, "utf8")) as Submission[];
-  } catch {
-    submissions = [];
-  }
+  const submissions = await readSubmissions();
   submissions.push({ id: randomUUID(), ...data, source, createdAt: new Date().toISOString() });
   await writeFile(filePath, JSON.stringify(submissions, null, 2), "utf8");
 }
