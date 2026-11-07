@@ -32,14 +32,16 @@ export default async function ProjectPage({
           </span>
         ))}
       </div>
-      <a
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-4 block text-sm text-blue-600 hover:underline dark:text-blue-400"
-      >
-        View on GitHub
-      </a>
+      {project.githubUrl && (
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 block text-sm text-blue-600 hover:underline dark:text-blue-400"
+        >
+          View on GitHub
+        </a>
+      )}
       <Link
         href="/projects"
         className="mt-10 inline-block text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
