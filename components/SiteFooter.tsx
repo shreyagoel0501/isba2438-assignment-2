@@ -1,15 +1,8 @@
 export default function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8">
-        <div>
-          <p className="font-display text-xl text-foreground">Shreya Goel</p>
-          <p className="font-mono text-xs uppercase tracking-widest text-blush-deep mt-1">
-            Business Analytics · Data Science
-          </p>
-        </div>
-        <div className="flex flex-col sm:items-end gap-2">
-          <p className="text-xs text-muted sm:hidden">© 2026 Shreya Goel</p>
+      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
           <a
             href="mailto:sgoel@scu.edu"
             className="text-muted hover:text-blush-deep"
@@ -33,9 +26,7 @@ export default function SiteFooter() {
             GitHub
           </a>
         </div>
-      </div>
-      <div className="max-w-6xl mx-auto px-6 pb-8 hidden sm:block">
-        <p className="text-xs text-muted">© 2026 Shreya Goel</p>
+        <p className="text-xs text-muted">© 2026</p>
       </div>
     </footer>
   );
