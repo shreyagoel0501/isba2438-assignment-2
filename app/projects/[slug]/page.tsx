@@ -20,8 +20,8 @@ export default async function ProjectPage({
   const next = projects[(index + 1) % projects.length];
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
-      <nav className="text-sm text-muted">
+    <main className="mx-auto w-full max-w-4xl px-6 py-16">
+      <nav className="font-mono text-xs uppercase tracking-widest text-muted">
         <Link href="/" className="hover:text-blush-deep">Home</Link>
         {" / "}
         <Link href="/projects" className="hover:text-blush-deep">Projects</Link>
@@ -29,15 +29,18 @@ export default async function ProjectPage({
         <span>{project.title}</span>
       </nav>
       <h1 className="mt-4 text-4xl sm:text-5xl">{project.title}</h1>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="mt-3 font-display text-2xl italic text-blush-deep">
         {project.summary}
       </p>
-      <p className="mt-6">{project.description}</p>
-      <div className="mt-6 flex flex-wrap gap-2">
+      <p className="mt-6 text-lg leading-8">{project.description}</p>
+      <p className="mt-8 font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
+        Built with
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
         {project.tech.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400"
+            className="rounded-full bg-blush-pale px-3 py-1 font-mono text-xs text-blush-deep"
           >
             {tag}
           </span>
@@ -48,20 +51,29 @@ export default async function ProjectPage({
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 block text-sm text-blue-600 hover:underline dark:text-blue-400"
+          className="mt-6 inline-block border border-border px-6 py-3 text-sm uppercase tracking-widest transition-colors hover:border-blush-deep hover:text-blush-deep"
         >
           View on GitHub
         </a>
       )}
-      <div className="mt-10 flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-400">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2">
         <Link
           href={`/projects/${previous.slug}`}
-          className="hover:text-blush-deep"
+          className="border border-border bg-card p-6 transition-colors hover:border-blush"
         >
-          ← {previous.title}
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
+            Previous
+          </p>
+          <p className="mt-2 font-display text-xl">← {previous.title}</p>
         </Link>
-        <Link href={`/projects/${next.slug}`} className="hover:text-blush-deep">
-          {next.title} →
+        <Link
+          href={`/projects/${next.slug}`}
+          className="border border-border bg-card p-6 text-right transition-colors hover:border-blush"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
+            Next
+          </p>
+          <p className="mt-2 font-display text-xl">{next.title} →</p>
         </Link>
       </div>
     </main>
