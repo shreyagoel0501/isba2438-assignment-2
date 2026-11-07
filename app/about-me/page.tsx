@@ -27,26 +27,22 @@ export default function AboutMe() {
         <h1 className="text-4xl sm:text-5xl">About me</h1>
         <div className="mt-6 space-y-4 text-lg leading-8 text-muted">
           <p>
-            My journey with data started in grade 11, when I chose the science stream and took computer science.
-            Honestly, I was not good at it at all. It took me a long time to build the logic in my head and get
-            comfortable with C++. But I stuck with it, and after grade 12 I did my undergrad at Christ University in
-            computer science, math and stats, which really solidified my foundation. C, Java, JavaScript, HTML, CSS, R,
-            Python, you name it, I’ve worked with it.
+            My journey with data started in grade 11, when I picked the science stream and took computer science. It
+            was not love at first sight and I was honestly terrible at it. I took a long time to get the basics in my
+            head. But I’m stubborn, so after grade 12 I signed up for more: an undergrad at Christ University in
+            computer science, math and stats. That’s where it finally clicked.
           </p>
           <p>
-            After that I joined Deloitte as a Workday Financials analyst. I didn’t code much there, apart from Workday
+            Then came Deloitte, where I was a Workday Financials analyst. I didn’t code much there, apart from Workday
             Studio, XSLT and connectors, but I realized that while I enjoy the technical side, I really love talking to
             clients about what the data found and what the insights mean. Business analytics sits right between the
-            technical team and the business team, and that’s where I want to be. Talking is one thing, but I also want
-            to be the person who actually understands the data.
+            tech team and the business team, which is why I decided to do this program. Talking is one thing, but I
+            also want to be the person who actually understands the data.
           </p>
           <p>
-            I’ve loved every single class in this program. My favorite so far is machine learning, especially learning
-            the statistics behind the algorithms.
-          </p>
-          <p>
-            In my free time I like to sing, crochet, and watch thrillers and murder mysteries. I love talking to
-            people, and I think I’d make a great personality hire.
+            In my free time I like to sing, crochet, and watch thrillers and murder mysteries, usually trying to solve
+            the murder before the detective does. I love talking to people, and I’m convinced I’d make a great
+            personality hire.
           </p>
         </div>
       </section>

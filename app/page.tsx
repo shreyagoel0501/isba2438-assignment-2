@@ -23,8 +23,9 @@ export default function Home() {
             Turning messy data into decisions that stick.
           </p>
           <p className="mt-4 text-muted">
-            MS Business Analytics student at Santa Clara University, previously
-            three years at Deloitte, now building ML models and LLM tools.
+            Business Analytics grad student at Santa Clara University,
+            previously at Deloitte. Always up for a coffee chat about data,
+            careers, or the last thriller you watched.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
