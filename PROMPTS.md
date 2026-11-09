@@ -25,6 +25,16 @@ All codes were written by Viber. I wrote the prompts and ran checks myself after
 | 16 | Rewrite my bio and Home intro in my own words | About page, `app/page.tsx` | 314e72d, 3b9a313 |
 | 17 | Restyle the contact page with my headshot (styling only) | Contact page, `ContactServerForm.tsx` | 584c907 |
 | 18 | Footer icon links | `SiteFooter.tsx` | 43c551b |
+| 19 | Rotating "I am an analyst / a problem solver / …" line in the hero | `components/RotatingRoles.tsx`, `app/page.tsx` | 257e27e |
+| 20 | Clinking coffee cups after the coffee-chat sentence, a polaroid frame around my photo, and screen-reader text for the rotating line | `CoffeeClink.tsx`, `globals.css`, `app/page.tsx`, `RotatingRoles.tsx` (the cups and frame were removed later, see 21–23) | 44acde2 |
+| 21 | Fix the hero photo disappearing inside the polaroid frame (frame had no width) | `app/page.tsx` | 44acde2 |
+| 22 | Remove the polaroid frame, keep the hero label on one line, make the cups bigger, then turn the cups so the handles face outward | `app/page.tsx`, `CoffeeClink.tsx`, `globals.css` | 44acde2 |
+| 23 | Remove the coffee cups, change "3+" to "3", add a link to my Microsoft publication, add a P.S. line to my bio | `app/page.tsx`, `lib/experience.ts`, `ExperienceCard.tsx`, About page | 44acde2 |
+| 24 | Add a Home link and a Résumé button to the nav, and switch the contact email to my Gmail | `SiteNav.tsx`, contact page, `SiteFooter.tsx` | 44acde2 |
+| 25 | Add a mobile menu so the nav fits on phones | `SiteNav.tsx`, `app/page.tsx` | 44acde2 |
+| 26 | Fix an ESLint error in the mobile menu (remove an unneeded `useEffect`) | `SiteNav.tsx` | 44acde2 |
+
+Not written by Viber (no code change): the résumé PDF (`public/Shreya_Goel_Resume.pdf`) is a copy of my data analyst résumé with my phone number removed, and the favicon (`app/icon.png`, replacing `favicon.ico`) is a round crop of my headshot. Claude prepared both files and I added them myself (commits 44acde2 and a1c6831).
 
 ## Critique examples
 
