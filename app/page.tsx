@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
+import RotatingRoles from "@/components/RotatingRoles";
 import SectionHeading from "@/components/SectionHeading";
 
 const stats = [
@@ -19,9 +20,7 @@ export default function Home() {
             Business Analytics · Data Science · AI
           </p>
           <h1 className="mt-4 text-6xl sm:text-7xl">Shreya Goel</h1>
-          <p className="mt-4 font-display text-2xl italic text-blush-deep">
-            Turning messy data into decisions that stick.
-          </p>
+          <RotatingRoles />
           <p className="mt-4 text-muted">
             Business Analytics grad student at Santa Clara University,
             previously at Deloitte. Always up for a coffee chat about data,
