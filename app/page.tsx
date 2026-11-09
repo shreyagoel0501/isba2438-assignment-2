@@ -6,7 +6,7 @@ import RotatingRoles from "@/components/RotatingRoles";
 import SectionHeading from "@/components/SectionHeading";
 
 const stats = [
-  { value: "3+", label: "Years at Deloitte" },
+  { value: "3", label: "Years at Deloitte" },
   { value: "26+", label: "Pipelines built" },
   { value: "4.0", label: "Graduate GPA" },
 ];
@@ -16,7 +16,7 @@ export default function Home() {
     <main className="mx-auto w-full max-w-6xl px-6 py-16">
       <section className="grid items-center gap-12 md:grid-cols-2">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
+          <p className="sm:whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-blush-deep">
             Business Analytics · Data Science · AI
           </p>
           <h1 className="mt-4 text-6xl sm:text-7xl">Shreya Goel</h1>

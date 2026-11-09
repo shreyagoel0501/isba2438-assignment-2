@@ -4,6 +4,7 @@ export type Role = {
   location: string;
   dates: string;
   bullets: string[];
+  link?: { label: string; href: string };
 };
 
 export const experience: Role[] = [
@@ -39,6 +40,10 @@ export const experience: Role[] = [
       "Engineered extractors for action items, tone shifts and agenda adherence that output consistent JSON for scoring.",
       "Co-authored a Microsoft Tech Community publication on the Online Meeting Effectiveness Index.",
     ],
+    link: {
+      label: "Read the publication",
+      href: "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/online-meeting-effectiveness-index-omei/4526638",
+    },
   },
   {
     title: "Workday Financials Technical Analyst",

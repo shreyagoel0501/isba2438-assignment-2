@@ -32,10 +32,11 @@ export default function RotatingRoles() {
   }, []);
 
   return (
-    <p
-      className="mt-4 font-display text-2xl"
-      aria-label="I am an analyst, a problem solver, a thriller detective and a crochet enthusiast"
-    >
+    <p className="mt-4 font-display text-2xl">
+      <span className="sr-only">
+        I am an analyst, a problem solver, a thriller detective and a crochet
+        enthusiast
+      </span>
       I am{" "}
       <span
         aria-hidden

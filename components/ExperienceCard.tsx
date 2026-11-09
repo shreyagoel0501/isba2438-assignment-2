@@ -23,6 +23,16 @@ export default function ExperienceCard({ role }: { role: Role }) {
           </li>
         ))}
       </ul>
+      {role.link && (
+        <a
+          href={role.link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-block text-sm text-blush-deep hover:underline"
+        >
+          {role.link.label} →
+        </a>
+      )}
     </div>
   );
 }

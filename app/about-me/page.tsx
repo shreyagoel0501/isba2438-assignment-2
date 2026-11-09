@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import ExperienceCard from "@/components/ExperienceCard";
 import { experience, education } from "@/lib/experience";
@@ -43,6 +44,13 @@ export default function AboutMe() {
             In my free time I like to sing, crochet, and watch thrillers and murder mysteries, usually trying to solve
             the murder before the detective does. I love talking to people, and I’m convinced I’d make a great
             personality hire.
+          </p>
+          <p className="mt-4 text-sm italic text-blush-deep">
+            P.S. If you have a thriller recommendation, my{" "}
+            <Link href="/contact-me-server-form" className="underline">
+              contact page
+            </Link>{" "}
+            is right there.
           </p>
         </div>
       </section>

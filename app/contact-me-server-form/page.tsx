@@ -15,8 +15,8 @@ export default function ContactMe() {
           />
           <p className="mt-4 text-sm text-muted">
             Prefer email? Reach me at{" "}
-            <a href="mailto:sgoel@scu.edu" className="text-blush-deep underline underline-offset-4">
-              sgoel@scu.edu
+            <a href="mailto:goelshreya0501@gmail.com" className="text-blush-deep underline underline-offset-4">
+              goelshreya0501@gmail.com
             </a>
           </p>
         </div>

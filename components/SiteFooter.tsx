@@ -28,7 +28,7 @@ export default function SiteFooter() {
             </svg>
           </a>
           <a
-            href="mailto:sgoel@scu.edu"
+            href="mailto:goelshreya0501@gmail.com"
             aria-label="Email Shreya"
             className="text-muted hover:text-blush-deep"
           >
