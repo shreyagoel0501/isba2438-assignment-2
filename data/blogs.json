@@ -1,0 +1,84 @@
+[
+  {
+    "slug": "my-first-year-in-the-us",
+    "title": "My first year in the US",
+    "summary": "A cancelled flight, a lot of tacos and 2 of the 5 cities on my Dard-e-Disco list.",
+    "date": "2026-11-13",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "My US journey started with a cancelled Air India flight. Instead of landing in San Francisco, I spent a night in Kolkata with people I had met on the plane a few hours earlier. By the time we finally boarded, we weren't strangers anymore."
+      },
+      {
+        "type": "paragraph",
+        "text": "Seeing the Golden Gate Bridge for the first time made it feel real. Then classes started, and I wanted to do well in every one of them. Teaching here felt very different: more discussion, more projects, and professors who actually want you to push back."
+      },
+      {
+        "type": "video",
+        "src": "/blog/golden-gate.mp4",
+        "alt": "Driving across the Golden Gate Bridge"
+      },
+      {
+        "type": "paragraph",
+        "text": "Fall came with a lot of firsts: my first pumpkin patch, my first Halloween, and my first Diwali away from home. Later came my first birthday away from home too. Both felt strange without my parents and lil brother around, but the people here made sure I didn't spend them alone."
+      },
+      {
+        "type": "image",
+        "src": "/blog/pumpkin-patch.jpg",
+        "alt": "Friends holding pumpkins at a pumpkin patch"
+      },
+      {
+        "type": "image",
+        "src": "/blog/diwali.jpg",
+        "alt": "Dressed up for Diwali"
+      },
+      {
+        "type": "image",
+        "src": "/blog/birthday.jpg",
+        "alt": "Birthday cake with candles"
+      },
+      {
+        "type": "paragraph",
+        "text": "Somewhere in between, I figured out the VTA (mostly), got a job at the campus cafe, and made it my mission to find the best taco spots near school."
+      },
+      {
+        "type": "paragraph",
+        "text": "I also got to travel a lot. I went to Yosemite, to San Diego for winter break, and could have stayed at the Monterey Bay Aquarium all day. I also made it to LA, which means I'm now 2 out of 5 on the Dard-e-Disco list. Three more to go."
+      },
+      {
+        "type": "image",
+        "src": "/blog/aquarium.jpg",
+        "alt": "Jellyfish at the Monterey Bay Aquarium"
+      },
+      {
+        "type": "image",
+        "src": "/blog/la.jpg",
+        "alt": "Urban Light lamps at LACMA in Los Angeles"
+      }
+    ]
+  },
+  {
+    "slug": "my-first-year-at-deloitte",
+    "title": "My first year at Deloitte",
+    "summary": "Corporate vibes, endless coffee breaks and a lot of firsts.",
+    "date": "2026-11-13",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "My first job out of college came with a big change: I moved back home to Mumbai to be with my family. Living at home again while starting my first job meant I came back every evening to my parents, my lil brother and a home-cooked meal."
+      },
+      {
+        "type": "paragraph",
+        "text": "It was my first time in a corporate office, and everything felt new: the meetings, the emails, figuring out who to ask for what. On my first project, I got my first real mentor, someone who took the time to explain why things were done a certain way and not just how. Not long after, I was talking to clients for the first time, which was scary at first and then became one of my favorite parts of the job."
+      },
+      {
+        "type": "paragraph",
+        "text": "I also found my first office bestie and a wonderful bunch of friends to go with them. Most of our best conversations happened over endless coffee breaks, which is probably where my love for coffee chats comes from."
+      },
+      {
+        "type": "paragraph",
+        "text": "A few months in, I got my first Applause award, and it made all the late nights feel worth it. Then came my first promotion and my first ever work anniversary. That first year turned into three years, and 26+ pipelines later, it's still the place where I learned how to work."
+      }
+    ]
+  }
+]
