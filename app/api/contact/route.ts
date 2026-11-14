@@ -10,7 +10,11 @@ type ContactBody = {
 export async function POST(request: Request) {
   let body: ContactBody;
   try {
-    body = (await request.json()) as ContactBody;
+    const parsed: unknown = await request.json();
+    if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+      return Response.json({ ok: false, error: "Invalid request body." }, { status: 400 });
+    }
+    body = parsed as ContactBody;
   } catch {
     return Response.json({ ok: false, error: "Invalid request body." }, { status: 400 });
   }
