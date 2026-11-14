@@ -63,7 +63,7 @@ export async function createBlog(data: { title: string; summary: string; body: s
   await mkdir(dataDir, { recursive: true });
   const posts = await readBlogs();
 
-  const base = slugify(data.title);
+  const base = slugify(data.title) || "post";
   let slug = base;
   let counter = 2;
   while (posts.some((post) => post.slug === slug)) {
