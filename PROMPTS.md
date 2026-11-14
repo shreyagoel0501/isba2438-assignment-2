@@ -64,3 +64,53 @@ Not written by Viber (no code change): the résumé PDF (`public/Shreya_Goel_Res
 - **Why:** the form doesn't use the browser's own validation (`noValidate`), so these server-side checks are what actually decide, and they match every rule in the handout.
 - **How I checked:** I ran a test script with 17 cases, including blank names and messages, missing or extra "@", `a@b`, `ana@.example.com`, `ana@example..com`, spaces and tabs in the email, and a non-text email value. I also tested the form by hand: an empty form, `a@b`, `a b@c.com`, and a valid entry, then checked `data/contact-submissions.json`.
 - **Result:** all 17 cases passed. In the browser, the invalid submissions showed red errors and weren't saved, and the valid one showed the green message and appeared in the JSON file.
+
+
+# Part 2
+
+## Prompt log
+
+| # | What I asked Viber | What changed | Commit |
+|---|---|---|---|
+| 27 | Add a POST API route for contact messages that reuses my existing validation and storage | `app/api/contact/route.ts` | eacd565 |
+| 28 | Build a client-side contact form that sends to the API with fetch, and point the nav's Contact link to it | `components/ContactApiForm.tsx`, `app/contact-me/page.tsx`, `SiteNav.tsx` | a1a167c |
+| 29 | Create the blog data file with my two posts, and helper functions to read, validate and create posts | `lib/blogs.ts`, `data/blogs.json`, `public/blog/` | e96333d |
+| 30 | Add GET and POST for blog posts, rejecting bodies that aren't plain objects | `app/api/blogs/route.ts` | 24ac526 |
+| 31 | Blog list page that loads posts from the API, post pages with a 404, a `/blog-posts` redirect and a nav link | `BlogList.tsx`, `app/blogs/`, `app/blog-posts/page.tsx`, `SiteNav.tsx` | ae7b8f5 |
+| 32 | An admin form that creates posts through the API | `components/BlogAdminForm.tsx`, `app/admin/blogs/page.tsx` | 6d2071e |
+| 33 | Fix posts getting an empty slug when the title has no letters or numbers | `lib/blogs.ts` | d52a2f7 |
+| 34 | Email each contact message to me with Resend, shared by both forms | `lib/contact-email.ts`, `lib/contact-delivery.ts`, `actions.ts`, `route.ts` | f0bc1c6 |
+| 35 | Make both forms show the same success message | `ContactApiForm.tsx`, `route.ts` | 2632bcf, f0bc1c6 |
+| 36 | Add the same `null` body check to the contact route | `app/api/contact/route.ts` | 5c3ff3e |
+
+Not written by Viber: the blog photos and video in `public/blog/` are my own. Claude converted them from iPhone formats (HEIC and MOV) to smaller JPG and MP4 files, and I copied them into the project. I created the Resend account and API key myself; the key is in `.env.local` (not committed) and in Vercel's settings.
+
+## Critique examples
+
+### 4. The contact API crashed on a `null` body
+**Files and commits:** `app/api/contact/route.ts` (eacd565 → 5c3ff3e), `app/api/blogs/route.ts` (24ac526)
+
+- **What Viber proposed:** the contact route only checked that the body was valid JSON. `null` is valid JSON, so it went straight into `validateContact`, which crashed trying to read `null.name`, and the route returned an error page instead of a clean 400.
+- **What I changed:** when I asked for the blogs route, I asked it to reject any body that isn't a plain object (`null` or an array) with a 400 "Invalid request body." Then I asked Viber to add the same check to the contact route.
+- **Why:** A bad input needs to get a 400 error and not crash the route. A public API can be called by anything, not just my form. I asked for the check in the blogs route because the same gap was visible in the contact route, and then fixed the contact route so both APIs behave the same way.
+- **How I checked:** I sent `null` to both APIs with curl. Before the fix, the live `/api/contact` returned a 500.
+- **Result:** both now return `400 {"ok":false,"error":"Invalid request body."}`.
+
+### 5. A title with no letters made a post with no URL
+**File and commits:** `lib/blogs.ts`, e96333d → d52a2f7
+
+- **What Viber proposed:** `createBlog` turned the title into a slug by keeping only letters and numbers. A title like `!!!` became an empty slug.
+- **What I noticed:** I published a post titled `!!!` on `/admin/blogs`. It saved to `data/blogs.json` with `"slug": ""`, but no success message appeared, because the form only shows it when the slug isn't empty. The post also had no page of its own.
+- **What I changed:** if the slug comes out empty, it now uses `post` (and then `post-2`, `post-3`, and so on).
+- **Why:** Every post needs its own URL. Without its own URL, the post gets saved but people will be unable to open it.
+- **How I checked:** I published `!!!` again.
+- **Result:** it saved as `"slug": "post"`, the green box showed, and "View post" opened `/blogs/post`.
+
+### 6. The live contact form couldn't save messages
+**Files and commit:** `lib/contact-delivery.ts`, `lib/contact-email.ts`, f0bc1c6
+
+- **What Viber's first version did:** both forms only saved messages to `data/contact-submissions.json`. Vercel's filesystem is read-only, so on the live site every message failed with "Could not save your message."
+- **What I changed:** I added email with Resend as a second way to deliver each message. A shared `deliverContact` function tries both the save and the email, and the form shows success if either works. If there's no API key, it skips the email, so the project still runs for anyone without my key.
+- **Why:** I want messages to reach my inbox, including on the live Vercel site I intend to share with recruiters. Doing the save and the email in one shared function keeps both forms working the same way, and skipping the email when there's no key means the project still runs for anyone else.
+- **How I checked:** I sent messages from both forms locally, then added the key in Vercel, redeployed, and sent one from the live site.
+- **Result:** all three emails reached my Gmail, and the live form showed "Thanks! Your message was sent."
