@@ -45,7 +45,7 @@ export default function ContactApiForm() {
       };
 
       if (response.status === 201 && data.ok) {
-        setSuccessMessage(data.message ?? "Thanks! Your message was saved.");
+        setSuccessMessage(data.message ?? "Thanks! Your message was sent.");
         setValues(emptyValues);
       } else if (data.errors) {
         setErrors(data.errors);
