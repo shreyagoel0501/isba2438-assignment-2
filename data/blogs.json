@@ -72,12 +72,42 @@
         "text": "It was my first time in a corporate office, and everything felt new: the meetings, the emails, figuring out who to ask for what. On my first project, I got my first real mentor, someone who took the time to explain why things were done a certain way and not just how. Not long after, I was talking to clients for the first time, which was scary at first and then became one of my favorite parts of the job."
       },
       {
+        "type": "image",
+        "src": "/blog/deloitte-office.jpg",
+        "alt": "Working from the office lounge with a coffee"
+      },
+      {
+        "type": "image",
+        "src": "/blog/deloitte-team-desk.jpg",
+        "alt": "My team at our desks"
+      },
+      {
         "type": "paragraph",
         "text": "I also found my first office bestie and a wonderful bunch of friends to go with them. Most of our best conversations happened over endless coffee breaks, which is probably where my love for coffee chats comes from."
       },
       {
+        "type": "image",
+        "src": "/blog/deloitte-friends.jpg",
+        "alt": "With my office friends"
+      },
+      {
+        "type": "image",
+        "src": "/blog/deloitte-lunch.jpg",
+        "alt": "Lunch break in the office cafeteria"
+      },
+      {
         "type": "paragraph",
         "text": "A few months in, I got my first Applause award, and it made all the late nights feel worth it. Then came my first promotion and my first ever work anniversary. That first year turned into three years, and 26+ pipelines later, it's still the place where I learned how to work."
+      },
+      {
+        "type": "image",
+        "src": "/blog/deloitte-dinner.jpg",
+        "alt": "Team dinner with cake"
+      },
+      {
+        "type": "image",
+        "src": "/blog/deloitte-team.jpg",
+        "alt": "Team photo in Deloitte t-shirts"
       }
     ]
   }
