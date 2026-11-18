@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import { findPosterUrl } from "./posters";
 
 export type RecommendationKind = "movie" | "show" | "book";
 
@@ -9,6 +10,8 @@ export type Recommendation = {
   kind: RecommendationKind;
   why: string;
   recommendedBy: string;
+  year?: number;
+  posterUrl?: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -36,10 +39,20 @@ export function validateRecommendation(input: {
   kind?: unknown;
   why?: unknown;
   recommendedBy?: unknown;
+  year?: unknown;
 }):
-  | { ok: true; data: { title: string; kind: RecommendationKind; why: string; recommendedBy: string } }
-  | { ok: false; errors: { title?: string; kind?: string; why?: string; recommendedBy?: string } } {
-  const errors: { title?: string; kind?: string; why?: string; recommendedBy?: string } = {};
+  | {
+      ok: true;
+      data: {
+        title: string;
+        kind: RecommendationKind;
+        why: string;
+        recommendedBy: string;
+        year?: number;
+      };
+    }
+  | { ok: false; errors: { title?: string; kind?: string; why?: string; recommendedBy?: string; year?: string } } {
+  const errors: { title?: string; kind?: string; why?: string; recommendedBy?: string; year?: string } = {};
 
   const title = typeof input.title === "string" ? input.title.trim() : "";
   if (!title) errors.title = "Please enter a title.";
@@ -54,8 +67,22 @@ export function validateRecommendation(input: {
   const recommendedBy = typeof input.recommendedBy === "string" ? input.recommendedBy.trim() : "";
   if (!recommendedBy) errors.recommendedBy = "Please enter your name.";
 
+  let year: number | undefined;
+  if (input.year !== undefined && input.year !== null && input.year !== "") {
+    if (
+      typeof input.year !== "number" ||
+      !Number.isInteger(input.year) ||
+      input.year < 1900 ||
+      input.year > 2100
+    ) {
+      errors.year = "Year must be a whole number between 1900 and 2100.";
+    } else {
+      year = input.year;
+    }
+  }
+
   if (Object.keys(errors).length > 0) return { ok: false, errors };
-  return { ok: true, data: { title, kind, why, recommendedBy } };
+  return { ok: true, data: { title, kind, why, recommendedBy, year } };
 }
 
 export async function createRecommendation(data: {
@@ -63,17 +90,21 @@ export async function createRecommendation(data: {
   kind: RecommendationKind;
   why: string;
   recommendedBy: string;
+  year?: number;
 }): Promise<Recommendation> {
   await mkdir(dataDir, { recursive: true });
   const items = await readRecommendations();
 
   const now = new Date().toISOString();
+  const posterUrl = await findPosterUrl(data.title, data.kind, data.year);
   const item: Recommendation = {
     id: crypto.randomUUID(),
     title: data.title,
     kind: data.kind,
     why: data.why,
     recommendedBy: data.recommendedBy,
+    year: data.year,
+    posterUrl,
     createdAt: now,
     updatedAt: now,
   };
@@ -85,18 +116,32 @@ export async function createRecommendation(data: {
 
 export async function updateRecommendation(
   id: string,
-  data: { title: string; kind: RecommendationKind; why: string; recommendedBy: string }
+  data: {
+    title: string;
+    kind: RecommendationKind;
+    why: string;
+    recommendedBy: string;
+    year?: number;
+  }
 ): Promise<Recommendation | null> {
   await mkdir(dataDir, { recursive: true });
   const items = await readRecommendations();
   const item = items.find((entry) => entry.id === id);
   if (!item) return null;
 
+  const detailsChanged =
+    item.title !== data.title || item.kind !== data.kind || item.year !== data.year;
+
   item.title = data.title;
   item.kind = data.kind;
   item.why = data.why;
   item.recommendedBy = data.recommendedBy;
+  item.year = data.year;
   item.updatedAt = new Date().toISOString();
+
+  if (detailsChanged || !item.posterUrl) {
+    item.posterUrl = await findPosterUrl(item.title, item.kind, item.year);
+  }
 
   await writeFile(filePath, JSON.stringify(items, null, 2), "utf8");
   return item;

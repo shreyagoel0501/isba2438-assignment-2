@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { Recommendation } from "@/lib/recommendations";
 
-type FieldErrors = { title?: string; kind?: string; why?: string; recommendedBy?: string };
+type FieldErrors = { title?: string; kind?: string; why?: string; recommendedBy?: string; year?: string };
 
 type RecommendationFormProps = {
   initial?: Recommendation;
@@ -11,7 +11,7 @@ type RecommendationFormProps = {
   onCancel?: () => void;
 };
 
-const emptyValues = { title: "", kind: "", why: "", recommendedBy: "" };
+const emptyValues = { title: "", kind: "", why: "", recommendedBy: "", year: "" };
 
 export default function RecommendationForm({ initial, onSaved, onCancel }: RecommendationFormProps) {
   const [values, setValues] = useState({
@@ -19,6 +19,7 @@ export default function RecommendationForm({ initial, onSaved, onCancel }: Recom
     kind: initial?.kind ?? "",
     why: initial?.why ?? "",
     recommendedBy: initial?.recommendedBy ?? "",
+    year: initial?.year !== undefined ? String(initial.year) : "",
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -48,6 +49,7 @@ export default function RecommendationForm({ initial, onSaved, onCancel }: Recom
             kind: values.kind,
             why: values.why,
             recommendedBy: values.recommendedBy,
+            year: values.year.trim() === "" ? undefined : Number(values.year),
           }),
         },
       );
@@ -73,7 +75,13 @@ export default function RecommendationForm({ initial, onSaved, onCancel }: Recom
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6 rounded-sm border border-border bg-card p-8">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className={`mt-8 space-y-6 rounded-sm border p-8 ${
+        initial ? "border-blush bg-blush-pale" : "border-border bg-card"
+      }`}
+    >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="font-display text-2xl">
           {initial ? `Editing "${initial.title}"` : "Recommend a thriller"}
@@ -128,6 +136,24 @@ export default function RecommendationForm({ initial, onSaved, onCancel }: Recom
           <option value="book">Book</option>
         </select>
         {errors.kind && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errors.kind}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="year" className="block font-mono text-xs uppercase tracking-widest text-muted">
+          Year <span className="normal-case tracking-normal">(optional)</span>
+        </label>
+        <input
+          id="year"
+          name="year"
+          type="number"
+          min={1900}
+          max={2100}
+          step={1}
+          value={values.year}
+          onChange={handleChange}
+          className="mt-2 block w-full rounded-sm border border-border bg-card px-4 py-3 text-sm outline-none transition-colors focus:border-blush-deep focus:ring-2 focus:ring-blush/30"
+        />
+        {errors.year && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errors.year}</p>}
       </div>
 
       <div>

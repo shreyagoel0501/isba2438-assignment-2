@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Recommendation } from "@/lib/recommendations";
 import RecommendationCard from "@/components/RecommendationCard";
 import RecommendationForm from "@/components/RecommendationForm";
@@ -9,6 +9,7 @@ export default function RecommendationsBoard() {
   const [recommendations, setRecommendations] = useState<Recommendation[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<Recommendation | null>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   const load = useCallback(() => {
     fetch("/api/recommendations")
@@ -30,6 +31,16 @@ export default function RecommendationsBoard() {
     load();
   }, [load]);
 
+  useEffect(() => {
+    if (!editing) return;
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("title")?.focus({ preventScroll: true });
+  }, [editing]);
+
+  function handleEdit(recommendation: Recommendation) {
+    setEditing(recommendation);
+  }
+
   function handleSaved() {
     setEditing(null);
     load();
@@ -50,12 +61,14 @@ export default function RecommendationsBoard() {
 
   return (
     <div>
-      <RecommendationForm
-        key={editing?.id ?? "new"}
-        initial={editing ?? undefined}
-        onSaved={handleSaved}
-        onCancel={editing ? () => setEditing(null) : undefined}
-      />
+      <div ref={formRef}>
+        <RecommendationForm
+          key={editing?.id ?? "new"}
+          initial={editing ?? undefined}
+          onSaved={handleSaved}
+          onCancel={editing ? () => setEditing(null) : undefined}
+        />
+      </div>
 
       {error && (
         <div role="alert" className="mt-8 rounded-xl border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-300">
@@ -75,7 +88,7 @@ export default function RecommendationsBoard() {
             <RecommendationCard
               key={recommendation.id}
               recommendation={recommendation}
-              onEdit={setEditing}
+              onEdit={handleEdit}
               onDelete={handleDelete}
             />
           ))}

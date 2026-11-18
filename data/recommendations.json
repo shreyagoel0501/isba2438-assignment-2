@@ -1,12 +1,25 @@
 [
   {
+    "id": "c7bb3d03-0c22-478d-a91c-fd7a459e179b",
+    "title": "Mindhunter",
+    "kind": "show",
+    "why": "Two FBI agents interview serial killers to understand how they think. Slow, chilling and so well made.",
+    "recommendedBy": "shreya",
+    "year": 2017,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/fbKE87mojpIETWepSbD5Qt741fp.jpg",
+    "createdAt": "2026-11-18T07:07:38.403Z",
+    "updatedAt": "2026-11-18T07:10:43.660Z"
+  },
+  {
     "id": "f822bd4a-2f37-4265-b03e-8dda7b8ed1e4",
     "title": "Kartavya",
     "kind": "movie",
     "why": "Saif Ali Khan as a small-town cop torn between his duty and his family. A slow-burn crime drama that stays gripping.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:57:53.123Z",
-    "updatedAt": "2026-11-18T06:57:53.123Z"
+    "updatedAt": "2026-11-18T06:57:53.123Z",
+    "year": 2026,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/doTwMyAphlDL5Z8WqE3elWWvj8M.jpg"
   },
   {
     "id": "7fa9386f-b0ab-4649-aca0-50dce863297a",
@@ -15,7 +28,9 @@
     "why": "The ultimate twisty thriller. The mid-movie reveal still lives in my head.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:56:53.123Z",
-    "updatedAt": "2026-11-18T06:56:53.123Z"
+    "updatedAt": "2026-11-18T06:56:53.123Z",
+    "year": 2014,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/ts996lKsxvjkO2yiYG0ht4qAicO.jpg"
   },
   {
     "id": "d60924b5-42bc-40e4-bb1a-a586f99e26e5",
@@ -24,7 +39,9 @@
     "why": "An unreliable narrator, so you keep second-guessing everything until the very end.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:55:53.123Z",
-    "updatedAt": "2026-11-18T06:55:53.123Z"
+    "updatedAt": "2026-11-18T06:55:53.123Z",
+    "year": 2016,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/AhTO2QWG0tug7yDoh0XoaMhPt3J.jpg"
   },
   {
     "id": "0646f63e-68d4-4bc1-a52f-4f949e1358eb",
@@ -33,7 +50,9 @@
     "why": "A maid takes a job with a seemingly perfect family, and nothing in that house is what it seems. Super addictive.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:54:53.123Z",
-    "updatedAt": "2026-11-18T06:54:53.123Z"
+    "updatedAt": "2026-11-18T06:54:53.123Z",
+    "year": 2022,
+    "posterUrl": "https://covers.openlibrary.org/b/id/15105883-L.jpg"
   },
   {
     "id": "f7dde0bc-dc70-4ad6-86fb-8e472e4e9a90",
@@ -42,7 +61,9 @@
     "why": "A Spanish Harlan Coben adaptation where one past mistake keeps pulling a man back into danger. Dark, layered and full of twists.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:53:53.123Z",
-    "updatedAt": "2026-11-18T06:53:53.123Z"
+    "updatedAt": "2026-11-18T06:53:53.123Z",
+    "year": 2021,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/iIwCuHSuor1PtTgUCzB04p3CrcU.jpg"
   },
   {
     "id": "0ebe099f-dcab-4682-9e1a-ed30ed06193d",
@@ -51,7 +72,9 @@
     "why": "A widow spots her murdered husband on a nanny cam, and it only gets wilder from there. Peak Harlan Coben binge material.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:52:53.123Z",
-    "updatedAt": "2026-11-18T06:52:53.123Z"
+    "updatedAt": "2026-11-18T06:52:53.123Z",
+    "year": 2024,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/Ertv4WLEyHgi8zN4ldOKgPcGAZ.jpg"
   },
   {
     "id": "dc793164-157e-4728-8ef5-3210c0d34496",
@@ -60,7 +83,9 @@
     "why": "Sooo sooo good. A dad breaks out of prison to find the son everyone thinks is dead. Tense, twisty, emotional and impossible to stop watching.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:51:53.123Z",
-    "updatedAt": "2026-11-18T06:51:53.123Z"
+    "updatedAt": "2026-11-18T06:51:53.123Z",
+    "year": 2026,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/pb9oYHHNzauiCQZT03MpDAg46GI.jpg"
   },
   {
     "id": "5ff34404-3e28-4b1f-926a-23fd32be20bb",
@@ -69,6 +94,8 @@
     "why": "Gripping from the first episode and keeps you on the edge of your seat. I did not see that ending coming.",
     "recommendedBy": "Shreya",
     "createdAt": "2026-11-18T06:50:53.123Z",
-    "updatedAt": "2026-11-18T06:50:53.123Z"
+    "updatedAt": "2026-11-18T06:50:53.123Z",
+    "year": 2021,
+    "posterUrl": "https://image.tmdb.org/t/p/w342/dOxXkneHeiAVbdpkEbajgiwobO9.jpg"
   }
 ]

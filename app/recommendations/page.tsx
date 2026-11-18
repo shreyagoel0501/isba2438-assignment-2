@@ -9,6 +9,10 @@ export default function Recommendations() {
         suggested.
       </p>
       <RecommendationsBoard />
+      <p className="mt-12 text-sm text-muted">
+        Movie and show posters from TMDB. This product uses the TMDB API but is not endorsed or
+        certified by TMDB. Book covers from Open Library.
+      </p>
     </main>
   );
 }
