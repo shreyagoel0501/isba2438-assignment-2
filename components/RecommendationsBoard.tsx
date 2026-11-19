@@ -3,15 +3,27 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Recommendation } from "@/lib/recommendations";
 import { addToWatchlist } from "@/lib/watchlist";
+import Pagination from "@/components/Pagination";
 import RecommendationCard from "@/components/RecommendationCard";
 import RecommendationForm from "@/components/RecommendationForm";
+
+const PAGE_SIZE = 6;
 
 export default function RecommendationsBoard() {
   const [recommendations, setRecommendations] = useState<Recommendation[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<Recommendation | null>(null);
   const [watchlistMessage, setWatchlistMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const formRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const totalPages = recommendations
+    ? Math.max(1, Math.ceil(recommendations.length / PAGE_SIZE))
+    : 1;
+  const visibleRecommendations =
+    recommendations?.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE) ?? [];
 
   const load = useCallback(() => {
     fetch("/api/recommendations")
@@ -21,7 +33,11 @@ export default function RecommendationsBoard() {
       })
       .then((data) => {
         if (!data.ok || !data.recommendations) throw new Error("Request failed");
-        setRecommendations(data.recommendations);
+        const items = data.recommendations;
+        setRecommendations(items);
+        setCurrentPage((page) =>
+          Math.min(page, Math.max(1, Math.ceil(items.length / PAGE_SIZE))),
+        );
         setError(null);
       })
       .catch(() => {
@@ -43,8 +59,19 @@ export default function RecommendationsBoard() {
     setEditing(recommendation);
   }
 
+  function handlePageChange(page: number) {
+    setCurrentPage(page);
+    gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function handleSaved() {
+    const wasEditing = editing !== null;
     setEditing(null);
+    if (!wasEditing) {
+      setCurrentPage(1);
+      setSuccessMessage("Thanks! Your recommendation was added.");
+      gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     load();
   }
 
@@ -80,15 +107,6 @@ export default function RecommendationsBoard() {
 
   return (
     <div>
-      <div ref={formRef}>
-        <RecommendationForm
-          key={editing?.id ?? "new"}
-          initial={editing ?? undefined}
-          onSaved={handleSaved}
-          onCancel={editing ? () => setEditing(null) : undefined}
-        />
-      </div>
-
       {error && (
         <div role="alert" className="mt-8 rounded-xl border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-300">
           {error}
@@ -102,26 +120,50 @@ export default function RecommendationsBoard() {
       )}
 
       {recommendations !== null && recommendations.length > 0 && (
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {watchlistMessage && (
+        <div ref={gridRef} className="mt-8">
+          {successMessage && (
             <p
               role="status"
-              className="sm:col-span-2 lg:col-span-3 rounded-xl border border-blush bg-blush-pale px-4 py-3 text-sm text-blush-deep"
+              className="rounded-xl border border-blush bg-blush-pale px-4 py-3 text-sm text-blush-deep"
             >
-              {watchlistMessage}
+              {successMessage}
             </p>
           )}
-          {recommendations.map((recommendation) => (
-            <RecommendationCard
-              key={recommendation.id}
-              recommendation={recommendation}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onAddToWatchlist={handleAddToWatchlist}
-            />
-          ))}
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {watchlistMessage && (
+              <p
+                role="status"
+                className="sm:col-span-2 lg:col-span-3 rounded-xl border border-blush bg-blush-pale px-4 py-3 text-sm text-blush-deep"
+              >
+                {watchlistMessage}
+              </p>
+            )}
+            {visibleRecommendations.map((recommendation) => (
+              <RecommendationCard
+                key={recommendation.id}
+                recommendation={recommendation}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                onAddToWatchlist={handleAddToWatchlist}
+              />
+            ))}
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       )}
+
+      <div ref={formRef} className="mt-8">
+        <RecommendationForm
+          key={editing?.id ?? "new"}
+          initial={editing ?? undefined}
+          onSaved={handleSaved}
+          onCancel={editing ? () => setEditing(null) : undefined}
+        />
+      </div>
     </div>
   );
 }
