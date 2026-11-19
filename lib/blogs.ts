@@ -1,16 +1,17 @@
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import { parseBody, blocksToBody } from "./blog-body";
+import type { BlogBlock } from "./blog-body";
 
-export type BlogBlock =
-  | { type: "paragraph"; text: string }
-  | { type: "image"; src: string; alt: string }
-  | { type: "video"; src: string; alt: string };
+export type { BlogBlock };
+export { parseBody, blocksToBody };
 
 export type BlogPost = {
   slug: string;
   title: string;
   summary: string;
   date: string;
+  updatedAt?: string;
   blocks: BlogBlock[];
 };
 
@@ -76,14 +77,38 @@ export async function createBlog(data: { title: string; summary: string; body: s
     title: data.title,
     summary: data.summary,
     date: new Date().toISOString().slice(0, 10),
-    blocks: data.body
-      .split(/\n\s*\n/)
-      .map((text) => text.trim())
-      .filter(Boolean)
-      .map((text) => ({ type: "paragraph" as const, text })),
+    blocks: parseBody(data.body),
   };
 
   posts.push(post);
   await writeFile(filePath, JSON.stringify(posts, null, 2), "utf8");
   return post;
+}
+
+export async function updateBlog(
+  slug: string,
+  data: { title: string; summary: string; body: string },
+): Promise<BlogPost | null> {
+  await mkdir(dataDir, { recursive: true });
+  const posts = await readBlogs();
+  const post = posts.find((entry) => entry.slug === slug);
+  if (!post) return null;
+
+  post.title = data.title;
+  post.summary = data.summary;
+  post.blocks = parseBody(data.body);
+  post.updatedAt = new Date().toISOString().slice(0, 10);
+
+  await writeFile(filePath, JSON.stringify(posts, null, 2), "utf8");
+  return post;
+}
+
+export async function deleteBlog(slug: string): Promise<boolean> {
+  await mkdir(dataDir, { recursive: true });
+  const posts = await readBlogs();
+  const next = posts.filter((post) => post.slug !== slug);
+  if (next.length === posts.length) return false;
+
+  await writeFile(filePath, JSON.stringify(next, null, 2), "utf8");
+  return true;
 }

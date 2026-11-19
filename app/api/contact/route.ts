@@ -1,4 +1,5 @@
 import { deliverContact } from "@/lib/contact-delivery";
+import { readSubmissions } from "@/lib/contact-store";
 import { validateContact } from "@/lib/contact-validation";
 
 type ContactBody = {
@@ -6,6 +7,19 @@ type ContactBody = {
   email?: unknown;
   message?: unknown;
 };
+
+export async function GET() {
+  console.log("[api] GET /api/contact");
+  try {
+    const submissions = await readSubmissions();
+    submissions.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    console.log("[api] GET /api/contact -> 200");
+    return Response.json({ ok: true, submissions });
+  } catch {
+    console.log("[api] GET /api/contact -> 500");
+    return Response.json({ ok: false, error: "Could not load contact messages." }, { status: 500 });
+  }
+}
 
 export async function POST(request: Request) {
   let body: ContactBody;
