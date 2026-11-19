@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { projects } from "@/lib/projects";
+import { readProjects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 import RotatingRoles from "@/components/RotatingRoles";
 import SectionHeading from "@/components/SectionHeading";
@@ -68,11 +69,9 @@ export default function Home() {
 
       <section className="mt-24">
         <SectionHeading title="Featured projects" />
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {projects.slice(0, 3).map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+        <Suspense fallback={<p className="mt-8 text-muted">Loading projects...</p>}>
+          <FeaturedProjects />
+        </Suspense>
         <Link
           href="/projects"
           className="mt-8 inline-block text-blush-deep hover:underline"
@@ -81,5 +80,17 @@ export default function Home() {
         </Link>
       </section>
     </main>
+  );
+}
+
+async function FeaturedProjects() {
+  const projects = await readProjects();
+
+  return (
+    <div className="mt-8 grid gap-6 md:grid-cols-3">
+      {projects.slice(0, 3).map((project) => (
+        <ProjectCard key={project.slug} project={project} />
+      ))}
+    </div>
   );
 }

@@ -1,4 +1,5 @@
-import { projects } from "@/lib/projects";
+import { Suspense } from "react";
+import { readProjects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 
 export default function Projects() {
@@ -9,11 +10,21 @@ export default function Projects() {
         A mix of machine learning, analytics and AI projects from school and
         work.
       </p>
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
-      </div>
+      <Suspense fallback={<p className="mt-8 text-muted">Loading projects...</p>}>
+        <ProjectsGrid />
+      </Suspense>
     </main>
+  );
+}
+
+async function ProjectsGrid() {
+  const projects = await readProjects();
+
+  return (
+    <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCard key={project.slug} project={project} />
+      ))}
+    </div>
   );
 }

@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, projects } from "@/lib/projects";
+import { getProjectBySlug, readProjects } from "@/lib/projects";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await readProjects();
   return projects.map((project) => ({ slug: project.slug }));
 }
 
@@ -12,15 +14,27 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+
+  return (
+    <main className="mx-auto w-full max-w-4xl px-6 py-16">
+      <Suspense fallback={<p className="mt-8 text-muted">Loading project...</p>}>
+        <ProjectContent slug={slug} />
+      </Suspense>
+    </main>
+  );
+}
+
+async function ProjectContent({ slug }: { slug: string }) {
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
+  const projects = await readProjects();
   const index = projects.findIndex((p) => p.slug === slug);
   const previous = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 py-16">
+    <>
       <nav className="font-mono text-xs uppercase tracking-widest text-muted">
         <Link href="/" className="hover:text-blush-deep">Home</Link>
         {" / "}
@@ -76,6 +90,6 @@ export default async function ProjectPage({
           <p className="mt-2 font-display text-xl">{next.title} →</p>
         </Link>
       </div>
-    </main>
+    </>
   );
 }
