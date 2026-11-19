@@ -8,6 +8,7 @@ type RecommendationCardProps = {
   recommendation: Recommendation;
   onEdit: (recommendation: Recommendation) => void;
   onDelete: (id: string) => void;
+  onAddToWatchlist: (recommendation: Recommendation) => void;
 };
 
 const posterSizes = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
@@ -16,6 +17,7 @@ export default function RecommendationCard({
   recommendation,
   onEdit,
   onDelete,
+  onAddToWatchlist,
 }: RecommendationCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const showPoster = Boolean(recommendation.posterUrl) && !imageFailed;
@@ -55,7 +57,14 @@ export default function RecommendationCard({
       <p className="mt-4 font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
         Recommended by {recommendation.recommendedBy}
       </p>
-      <div className="mt-6 flex gap-4">
+      <div className="mt-6 flex flex-wrap gap-4">
+        <button
+          type="button"
+          onClick={() => onAddToWatchlist(recommendation)}
+          className="text-xs uppercase tracking-widest text-blush-deep transition-colors hover:text-foreground"
+        >
+          Add to watchlist
+        </button>
         <button
           type="button"
           onClick={() => onEdit(recommendation)}

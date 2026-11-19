@@ -11,6 +11,7 @@ const links = [
   { href: "/projects", label: "Projects" },
   { href: "/blogs", label: "Blog" },
   { href: "/recommendations", label: "Recs" },
+  { href: "/watchlist", label: "Watchlist" },
   { href: "/contact-me", label: "Contact" },
 ];
 
@@ -38,7 +39,7 @@ export default function SiteNav() {
             className="h-10 w-10 rounded-full object-cover object-[58%_35%] ring-1 ring-blush transition-shadow hover:ring-blush-deep"
           />
         </Link>
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className={linkClass(link.href)}>
               {link.label}
@@ -55,7 +56,7 @@ export default function SiteNav() {
         </div>
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center text-muted transition-colors hover:text-blush-deep md:hidden"
+          className="flex h-10 w-10 items-center justify-center text-muted transition-colors hover:text-blush-deep lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -75,7 +76,7 @@ export default function SiteNav() {
         </button>
       </div>
       {open && (
-        <div className="border-b border-border bg-card px-6 py-4 md:hidden">
+        <div className="border-b border-border bg-card px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-4">
             {links.map((link) => (
               <Link

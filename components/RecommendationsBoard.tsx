@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Recommendation } from "@/lib/recommendations";
+import { addToWatchlist } from "@/lib/watchlist";
 import RecommendationCard from "@/components/RecommendationCard";
 import RecommendationForm from "@/components/RecommendationForm";
 
@@ -9,6 +10,7 @@ export default function RecommendationsBoard() {
   const [recommendations, setRecommendations] = useState<Recommendation[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<Recommendation | null>(null);
+  const [watchlistMessage, setWatchlistMessage] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   const load = useCallback(() => {
@@ -44,6 +46,23 @@ export default function RecommendationsBoard() {
   function handleSaved() {
     setEditing(null);
     load();
+  }
+
+  function handleAddToWatchlist(recommendation: Recommendation) {
+    const result = addToWatchlist({
+      id: recommendation.id,
+      title: recommendation.title,
+      kind: recommendation.kind,
+      year: recommendation.year,
+      posterUrl: recommendation.posterUrl,
+    });
+    setWatchlistMessage(
+      result === "added"
+        ? "Added to your watchlist"
+        : result === "exists"
+          ? "Already in your watchlist"
+          : "Could not save to your watchlist",
+    );
   }
 
   async function handleDelete(id: string) {
@@ -84,12 +103,21 @@ export default function RecommendationsBoard() {
 
       {recommendations !== null && recommendations.length > 0 && (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {watchlistMessage && (
+            <p
+              role="status"
+              className="sm:col-span-2 lg:col-span-3 rounded-xl border border-blush bg-blush-pale px-4 py-3 text-sm text-blush-deep"
+            >
+              {watchlistMessage}
+            </p>
+          )}
           {recommendations.map((recommendation) => (
             <RecommendationCard
               key={recommendation.id}
               recommendation={recommendation}
               onEdit={handleEdit}
               onDelete={handleDelete}
+              onAddToWatchlist={handleAddToWatchlist}
             />
           ))}
         </div>
