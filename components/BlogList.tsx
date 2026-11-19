@@ -1,16 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { BlogPost } from "@/lib/blogs";
-
-function formatDate(date: string) {
-  return new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+import BlogCard from "@/components/BlogCard";
 
 export default function BlogList() {
   const [posts, setPosts] = useState<BlogPost[] | null>(null);
@@ -50,17 +42,7 @@ export default function BlogList() {
   return (
     <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
-        <Link
-          key={post.slug}
-          href={`/blogs/${post.slug}`}
-          className="block rounded-sm border border-border bg-card p-8 transition-all duration-200 hover:-translate-y-1 hover:border-blush"
-        >
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-blush-deep">
-            {formatDate(post.date)}
-          </p>
-          <h2 className="mt-2 font-display text-2xl">{post.title}</h2>
-          <p className="mt-2 text-muted">{post.summary}</p>
-        </Link>
+        <BlogCard key={post.slug} post={post} />
       ))}
     </div>
   );
