@@ -75,6 +75,16 @@ export async function proxy(request: NextRequest) {
   if (await isAuthorized(request)) {
     return NextResponse.next();
   }
+  const secFetchMode = request.headers.get("sec-fetch-mode");
+  const secFetchDest = request.headers.get("sec-fetch-dest");
+  const isBackgroundRequest =
+    request.headers.has("next-router-prefetch") ||
+    request.headers.has("rsc") ||
+    (secFetchMode !== null && secFetchMode !== "navigate") ||
+    (secFetchDest !== null && secFetchDest !== "document");
+  if (isBackgroundRequest) {
+    return NextResponse.json({ ok: false, error: "Unauthorized." }, { status: 401 });
+  }
   return NextResponse.json(
     { ok: false, error: "Unauthorized." },
     { status: 401, headers: { "WWW-Authenticate": 'Basic realm="Admin"' } },

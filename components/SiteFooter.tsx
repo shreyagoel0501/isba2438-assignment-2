@@ -42,7 +42,7 @@ export default function SiteFooter() {
         </div>
         <p className="flex items-center gap-4 text-xs text-muted">
           <span>© 2026</span>
-          <Link href="/admin" className="hover:text-blush-deep">
+          <Link href="/admin" prefetch={false} className="hover:text-blush-deep">
             Admin
           </Link>
         </p>
