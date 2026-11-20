@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function SiteFooter() {
   return (
     <footer className="border-t border-border">
@@ -42,9 +40,9 @@ export default function SiteFooter() {
         </div>
         <p className="flex items-center gap-4 text-xs text-muted">
           <span>© 2026</span>
-          <Link href="/admin" prefetch={false} className="hover:text-blush-deep">
+          <a href="/admin" className="hover:text-blush-deep">
             Admin
-          </Link>
+          </a>
         </p>
       </div>
     </footer>
