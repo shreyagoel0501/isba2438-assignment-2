@@ -62,6 +62,8 @@ export default function RecommendationForm({ initial, onSaved, onCancel }: Recom
       if (response.ok && data.ok) {
         if (!initial) setValues(emptyValues);
         onSaved();
+      } else if (response.status === 401) {
+        setErrorMessage("Only the site owner can edit or delete recommendations.");
       } else if (data.errors) {
         setErrors(data.errors);
       } else {

@@ -97,6 +97,10 @@ export default function RecommendationsBoard() {
     try {
       const response = await fetch(`/api/recommendations/${id}`, { method: "DELETE" });
       const data = (await response.json()) as { ok: boolean; error?: string };
+      if (response.status === 401) {
+        setError("Only the site owner can edit or delete recommendations.");
+        return;
+      }
       if (!response.ok || !data.ok) throw new Error(data.error ?? "Request failed");
       if (editing?.id === id) setEditing(null);
       load();
